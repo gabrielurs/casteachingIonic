@@ -1,4 +1,8 @@
 <template>
+  <ion-content>
+  <ion-refresher slot="fixed" @ionRefresh="refresh" id="refresher">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     <ion-list-header> Videos </ion-list-header>
 
@@ -12,43 +16,39 @@
       </ion-label>
     </ion-item>
   </ion-list>
-
+  </ion-content>
 </template>
 
 <script>
-import {IonAvatar, IonItem, IonLabel, IonList, IonListHeader} from "@ionic/vue";
+import {IonAvatar, IonContent, IonItem, IonLabel, IonList, IonListHeader, IonRefresherContent} from "@ionic/vue";
 import casteaching from "@acacha/casteaching";
 export default {
   name: "Videos",
   components:{
-  IonList, IonItem, IonListHeader, IonAvatar,IonLabel
+  IonList, IonItem, IonListHeader, IonAvatar,IonLabel,IonRefresherContent,IonContent
   },
   data(){
     return{
-      videos:[
-        // {
-        //     id: 1,
-        //     title: "Ubuntu 101",
-        //     description: "# Here description",
-        //     url: "https://www.youtube.com/embed/w8j07_DBl_I",
-        // },
-        // {
-        //   id: 2,
-        //   title: "Ubuntu 102",
-        //   description: "# Here description",
-        //   url: "https://www.youtube.com/embed/w8j07_DBl_I",
-        // },
-        // {
-        //   id: 3,
-        //   title: "Ubuntu 103",
-        //   description: "# Here description",
-        //   url: "https://www.youtube.com/embed/w8j07_DBl_I",
-        // },
-      ]
+      videos:[],
+      loading: true
     }
   },
   async created() {
-   this.videos = await casteaching.videos()
+    await this.fetchVideos();
+    this.loading = false;
+  },
+  mounted() {
+    this.refresher = document.getElementById('refresher');
+  },
+  methods:{
+    async refresh(){
+      await this.fetchVideos();
+      this.refresher.complete();
+      },
+    async fetchVideos(){
+      return this.videos = await casteaching.videos()
+
+    }
   }
 }
 </script>
