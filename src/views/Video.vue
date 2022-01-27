@@ -73,14 +73,9 @@ export default {
     }
   },
   async created() {
-    this.video = await casteaching.video.show(this.$route.params.id);
-    // this.video={
-    //   id: 1,
-    //   title: "Ubuntu 101",
-    //   description: "# Here description",
-    //   url: "https://www.youtube.com/embed/w8j07_DBl_I",
-    //   published_at: "2020-12-13T20:00:00.000000Z",
-    // }
+    const api = casteaching({baseUrl: 'https://casteaching.test/api'})
+    api.setToken("gaVpc0snoMsdM5w6aaiNu2DMLPxipTYB6mKdfUaT")
+    this.video = await api.video.show(1);
   }
 }
 </script>
