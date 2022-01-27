@@ -73,7 +73,7 @@ export default {
     }
   },
   async created() {
-    const api = casteaching({baseUrl: 'https://casteaching.test/api'})
+    const api = casteaching({baseUrl: 'https://casteaching.gabriel.alumnedam.me/api'})
     api.setToken("gaVpc0snoMsdM5w6aaiNu2DMLPxipTYB6mKdfUaT")
     this.video = await api.video.show(1);
   }
