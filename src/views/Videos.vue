@@ -34,8 +34,9 @@ export default {
     }
   },
   async created() {
-    await this.fetchVideos();
-    this.loading = false;
+    const api = casteaching({baseUrl: 'https://casteaching.gabriel.alumnedam.me/api'})
+    api.setToken("gaVpc0snoMsdM5w6aaiNu2DMLPxipTYB6mKdfUaT")
+    this.video = await api.videos();
   },
   mounted() {
     this.refresher = document.getElementById('refresher');
