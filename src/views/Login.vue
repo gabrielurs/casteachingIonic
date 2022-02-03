@@ -57,9 +57,7 @@ import {
 } from "@ionic/vue";
 
 import { Device } from '@capacitor/device';
-import axios from 'axios'
 import store from "../store";
-import casteaching from "@acacha/casteaching";
 
 export default {
   name: 'login',
@@ -88,32 +86,27 @@ export default {
   },
   methods: {
     async login() {
+      // OBTENIR EL DEVICE_NAME:
       const info = await Device.getInfo();
+
+      // CAPACITOR // CORDOVA
+      // 'email' => 'required',
       // 'password' => 'required',
       // 'device_name' => 'required',
-      // POST -> URL https://casteaching.gabriel.alumnedam.me/api/sanctum/token
+      // POST -> URL https://casteaching.test/api/sanctum/token
 
       let token = null
       const device_name = (info && info.name) || 'TokenCasteachingIonic'
       try {
-        token = casteaching.login(this.email,this.password,device_name)
+        token = await this.casteaching.login(this.email,this.password,device_name)
+        this.casteaching.setToken(token)
       } catch (error) {
         console.log(error);
       }
-      let response2 = null
 
-      const axiosClient = axios.create({
-        baseURL: 'https://casteaching.test/api',
-        withCredentials: true,
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + token
-        }
-      })
       let user
       try {
-        user = await casteaching.user()
+        user = await this.casteaching.user()
       } catch (error) {
         console.log(error);
       }
@@ -124,6 +117,7 @@ export default {
 
       this.emitter.emit('login',user)
 
+      // REDIRECT AMB SPA router.push cap a quina URL o ruta
       let path = '/user'
       // route parameters wantedRoute
       if(this.$route.params && this.$route.params.wantedRoute) path = this.$route.params.wantedRoute
