@@ -44,6 +44,7 @@ import {
   IonTitle,
   IonToolbar
 } from "@ionic/vue";
+
 export default {
   name: 'Dashboard',
   components: {

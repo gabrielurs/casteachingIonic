@@ -32,7 +32,7 @@
 
 <script>
 import { IonApp, IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader, IonMenu, IonMenuToggle, IonNote, IonRouterOutlet, IonSplitPane } from '@ionic/vue';
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
 import { archiveOutline, archiveSharp, bookmarkOutline, bookmarkSharp, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
 import store from "./store";
@@ -55,7 +55,8 @@ export default defineComponent({
   },
   data() {
     return {
-      appPages: []
+      appPages: [],
+      selectedIndex: null
     }
   },
   created() {
@@ -77,7 +78,6 @@ export default defineComponent({
     const route = useRoute();
 
     return {
-      selectedIndex,
       labels,
       archiveOutline,
       archiveSharp,
@@ -98,6 +98,7 @@ export default defineComponent({
   },
   methods: {
     async setAppPages() {
+      this.selectedIndex = 0;
       this.appPages = []
       const user = await store.get('user')
       if (user) {
@@ -143,6 +144,13 @@ export default defineComponent({
         iosIcon: paperPlaneOutline,
         mdIcon: paperPlaneSharp
       })
+
+      const path = window.location.pathname;
+      console.log('path:');
+      console.log(path);
+      if (path !== undefined) {
+        this.selectedIndex = this.appPages.findIndex(page => page.url.toLowerCase() === path.toLowerCase());
+      }
     }
   }
 });

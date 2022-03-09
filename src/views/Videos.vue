@@ -158,9 +158,7 @@ export default {
         this.videos = await this.casteaching.videos()
       } catch (error) {
         console.log(error);
-        // TODO toast
       }
-
     }
   }
 }

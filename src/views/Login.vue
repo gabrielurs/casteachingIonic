@@ -98,10 +98,10 @@ export default {
       let token = null
       const device_name = (info && info.name) || 'TokenCasteachingIonic'
       try {
-        token = await this.casteaching.login(this.email,this.password,device_name)
-        this.casteaching.setToken(token)
+         token = await this.casteaching.login(this.email,this.password,device_name)
+         this.casteaching.setToken(token)
       } catch (error) {
-        console.log(error);
+         console.log(error);
       }
 
       let user
@@ -127,3 +127,4 @@ export default {
   }
 }
 </script>
+

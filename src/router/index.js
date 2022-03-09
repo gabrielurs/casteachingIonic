@@ -65,7 +65,7 @@ router.beforeEach(async (to, from, next) => {
     next({
       name: 'login',
       params: {
-        wantedRoute: to.fullPath,
+          wantedRoute: to.fullPath,
       },
     })
     return

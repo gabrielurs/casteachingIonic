@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-menu-button color="primary"></ion-menu-button>
         </ion-buttons>
-        <ion-title>{{ video.title}}</ion-title>
+        <ion-title>{{ video.title }}</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -20,12 +20,12 @@
         <iframe id="video" :src="video.url" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <ion-card>
           <ion-card-header>
-            <ion-card-title>{{ video.title}}</ion-card-title>
-            <ion-card-subtitle>{{ video.published_at}}</ion-card-subtitle>
+            <ion-card-title>{{ video.title }}</ion-card-title>
+            <ion-card-subtitle>{{ video.published_at }}</ion-card-subtitle>
           </ion-card-header>
 
           <ion-card-content>
-            {{ video.description}}
+            {{ video.description }}
           </ion-card-content>
         </ion-card>
       </div>

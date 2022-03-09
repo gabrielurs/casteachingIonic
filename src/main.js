@@ -24,7 +24,8 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import casteaching from '@acacha/casteaching';
+
+import casteaching from '@acacha/casteaching'
 
 const app = createApp(App)
   .use(IonicVue)
